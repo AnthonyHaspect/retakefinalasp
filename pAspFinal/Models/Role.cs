@@ -6,7 +6,7 @@ namespace pAspFinal.Models
     {
         public int Id { get; set; }
         [Required]
-        public string Name { get; set; }
+        public string Nom { get; set; }
         public virtual ICollection<Utilisateur>? Utilisateurs { get; set; }//relation 1 à N
     }
 }

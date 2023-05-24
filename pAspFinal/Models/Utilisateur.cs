@@ -6,7 +6,7 @@ namespace pAspFinal.Models
     {
         public int Id { get; set; }
         [Required]
-        public string Name { get; set; }
+        public string Nom { get; set; }
         [Required]
         public string Compagnie { get; set; }
         public int RoleId { get; set; }

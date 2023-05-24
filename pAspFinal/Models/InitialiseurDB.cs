@@ -1,4 +1,6 @@
-﻿namespace pAspFinal.Models
+﻿using pAspFinal.Models;
+
+namespace pAspFinal.Models
 {
     public static class InitialiseurDB
     {
@@ -97,7 +99,75 @@
 
         };
 
+        public static List<Role> _Roles = new List<Role>
+        {
+            new Role {Nom = "Admin"},
+            new Role {Nom = "Utilisateur"},
+            new Role {Nom = "temporaire"},
+        };
+        private static Dictionary<string, Role> _NomRoles;
+        public static Dictionary<string, Role> NomRoles
+        {
+            get
+            {
+                _NomRoles = new Dictionary<string, Role>();
+                foreach (Role roles in _Roles)
+                {
+                    _NomRoles.Add(roles.Nom, roles);
+                }
+                return _NomRoles;
+            }
+        }
+        public static List<Utilisateur> _Utilisateur = new List<Utilisateur>
+        {
+            new Utilisateur { Nom = "Administrateur1", Compagnie = "Admin", Role = NomRoles["Admin"] },
+            new Utilisateur { Nom = "Utilisateur1", Compagnie = "Cegep Outaouiais", Role = NomRoles["Utilisateur"] },
+            new Utilisateur { Nom = "Anthony", Compagnie = "NET", Role = NomRoles["Utilisateur"] },
+            new Utilisateur { Nom = "Haspect", Compagnie = "ORG", Role = NomRoles["Utilisateur"] }
+        };
+
+        public static List<Formulaire> _Formulaire = new List<Formulaire>
+        {
+            new Formulaire { Nom = "FormulaireAdmin", Questions = _Questions, Utilisateurs = _Utilisateur},
+            new Formulaire { Nom = "FormulaireUtilisateur", Questions = _Questions, Utilisateurs = _Utilisateur}
+        };
+
+        public static void Seed(IApplicationBuilder applicationBuilder)
+        {
+            pAspFinal_dbContext pAspFinal_DbContext = applicationBuilder.ApplicationServices.CreateScope().ServiceProvider.GetRequiredService<pAspFinal_dbContext>();
+
+            if (!pAspFinal_DbContext.Formulaires.Any())
+            {
+                pAspFinal_DbContext.Formulaires.AddRange(_Formulaire);
+                pAspFinal_DbContext.SaveChanges();
+            }
+            if (!pAspFinal_DbContext.Utilisateurs.Any())
+            {
+                pAspFinal_DbContext.Utilisateurs.AddRange(_Utilisateur);
+                pAspFinal_DbContext.SaveChanges();
+            }
+            if (!pAspFinal_DbContext.Roles.Any())
+            {
+                pAspFinal_DbContext.Roles.AddRange(NomRoles.Values);
+                pAspFinal_DbContext.SaveChanges();
+            }
+            if (!pAspFinal_DbContext.Questions.Any())
+            {
+                pAspFinal_DbContext.Questions.AddRange(_Questions);
+                pAspFinal_DbContext.SaveChanges();
+            }
+            if (!pAspFinal_DbContext.Sections.Any())
+            {
+                pAspFinal_DbContext.Sections.AddRange(NomSection.Values);
+                pAspFinal_DbContext.SaveChanges();
+            }
+            if (!pAspFinal_DbContext.Types.Any())
+            {
+                pAspFinal_DbContext.Types.AddRange(NomType.Values);
+                pAspFinal_DbContext.SaveChanges();
+            }
 
 
+        }
     }
 }
