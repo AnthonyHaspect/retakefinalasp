@@ -12,12 +12,12 @@ namespace pAspFinal.Models
         public string? ParDefault { get; set; }
         public int? ParentID { get; set; }//clé étrangère qui li la question a son parent (peut être null)
         public Question? Parent { get; set; } //peut avoir une question parent (peut être null)
-        public ICollection<Question>? Children { get; set; }
+        public List<Question>? Children { get; set; }
         public int TypeID { get; set; }//clé étrangère qui li la question au type
         public Type Type { get; set; } //possède seulement un type
         public int SectionID { get; set; } //clé étrangère qui li la question a la section
         public Section Section { get; set; } //est dans seulement une section
-        public ICollection<Formulaire>? Formulaires { get; set; }
+        public List<Formulaire>? Formulaires { get; set; }
         
         
         //réponses va être une session ou un cookie

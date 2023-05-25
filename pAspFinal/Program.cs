@@ -6,8 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddDbContext<pAspFinal_dbContext>(options =>
-{
+builder.Services.AddDbContext<pAspFinal_dbContext>(options => {
     options.UseSqlServer(builder.Configuration["ConnectionStrings:pAspFinal_dbContextConnection"]);
 });
 

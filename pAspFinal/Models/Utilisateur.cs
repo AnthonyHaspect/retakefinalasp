@@ -11,6 +11,6 @@ namespace pAspFinal.Models
         public string Compagnie { get; set; }
         public int RoleId { get; set; }
         public Role Role { get; set; }
-        public virtual ICollection<Formulaire> Formulaire { get; set; }
+        public List<Formulaire> Formulaire { get; set; }
     }
 }
