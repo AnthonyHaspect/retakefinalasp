@@ -50,6 +50,33 @@ namespace pAspFinal.Models
                 return _NomType;
             }
         }
+        public static List<Choix> _Choix1 = new List<Choix>()
+        {
+            new Choix{Options = "Test1Q1"},
+            new Choix{Options = "Test2Q1"},
+            new Choix{Options = "Test3Q1"},
+        };
+        public static List<Choix> _Choix2 = new List<Choix>()
+        {
+            new Choix{Options = "Test1Q2"},
+            new Choix{Options = "Test2Q2"},
+            new Choix{Options = "Test3Q2"},
+            new Choix{Options = "Test4Q2"},
+        };
+        public static List<Choix> _Choix3 = new List<Choix>()
+        {
+            new Choix{Options = "Test1Q3"},
+            new Choix{Options = "Test2Q3"},
+            new Choix{Options = "Test3Q3"},
+            new Choix{Options = "Test4Q3"},
+            new Choix{Options = "Test5Q3"},
+        };
+        public static List<Choix> _Choix4 = new List<Choix>()
+        {
+            new Choix{Options = "Test1Q4"},
+            new Choix{Options = "Test2Q4"}
+        };
+
         public static List<Question> _Questions = new List<Question>
         {
             new Question
@@ -65,7 +92,7 @@ namespace pAspFinal.Models
                 Titre = "test1",
                 Commentaire = "test1",
                 ParDefault = "test1",
-                Choix = new List<string> {"test1", "test2", "test3", "test4", "test5"},
+                Choix = _Choix1,
                 Section = NomSection["Sécurité informatique"],
                 Type = NomType["Choisir X"]
             },            
@@ -74,7 +101,7 @@ namespace pAspFinal.Models
                 Titre = "test2",
                 Commentaire = "test2",
                 ParDefault = "test2",
-                Choix = new List<string> {"test1", "test2", "test3", "test4", "test5"},
+                Choix = _Choix2,
                 Section = NomSection["Sécurité informatique"],
                 Type = NomType["Choisir 1"]
             },            
@@ -83,18 +110,18 @@ namespace pAspFinal.Models
                 Titre = "test3",
                 Commentaire = "test3",
                 ParDefault = "test3",
-                Choix = new List<string> {"test1", "test2", "test3", "test4", "test5"},
+                Choix = _Choix3,
                 Section = NomSection["Sécurité informatique"],
                 Type = NomType["Choisir 1"]
             },            
             new Question
             {
-                Titre = "test3 pour choisir liste",
+                Titre = "test4 pour choisir liste",
                 Commentaire = "le commentaire pour la question sur choisir liste",
-                ParDefault = "test3",
-                Choix = new List<string> {"test1", "test2", "test3", "test4", "test5"},
+                ParDefault = "test4",
+                Choix = _Choix4,
                 Section = NomSection["Sécurité informatique"],
-                Type = NomType["Choisir 1"]
+                Type = NomType["Choisir liste"]
             }
 
         };
