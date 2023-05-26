@@ -43,6 +43,6 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-//InitialiseurDB.Seed(app);
+InitialiseurDB.Seed(app);
 
 app.Run();
