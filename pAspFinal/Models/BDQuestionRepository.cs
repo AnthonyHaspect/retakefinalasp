@@ -1,4 +1,5 @@
-﻿namespace pAspFinal.Models
+﻿using Microsoft.EntityFrameworkCore;
+namespace pAspFinal.Models
 {
     public class BDQuestionRepository : IQuestionRepository
     {
@@ -24,7 +25,8 @@
 
         public Question GetById(int id)
         {
-            return _DbContext.Questions.FirstOrDefault(q => q.Id == id);
+            return _DbContext.Questions.Include(z => z.Choix).Include(x => x.Section).Include(c => c.Type).Include(q => q.Parent).FirstOrDefault(q => q.Id == id);
+
         }
 
         public void Modifier(Question question)
@@ -33,10 +35,15 @@
             _DbContext.SaveChanges();
         }
 
-        public void Supprimer(Question question)
+        public void Supprimer(int id)
         {
-            _DbContext.Remove(question);
-            _DbContext.SaveChanges();
+            Question question = _DbContext.Questions.FirstOrDefault(q => q.Id == id);
+            if (question != null)
+            {
+                _DbContext.Remove(question);
+                _DbContext.SaveChanges();
+            }
+            
         }
     }
 }

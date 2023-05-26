@@ -21,9 +21,9 @@
             _DbContext.SaveChanges();
         }
 
-        public Type GetById(int typeId)
+        public Type GetById(int Id)
         {
-            return _DbContext.Types.FirstOrDefault(t => t.Id == typeId);
+            return _DbContext.Types.FirstOrDefault(t => t.Id == Id);
         }
 
         public void Modifier(Type type)
@@ -32,10 +32,15 @@
             _DbContext.SaveChanges();
         }
 
-        public void Supprimer(Type type)
+        public void Supprimer(int id)
         {
-            _DbContext.Types.Remove(type); 
-            _DbContext.SaveChanges();
+            Type type = _DbContext.Types.FirstOrDefault(t => t.Id == id);
+            if (type != null)
+            {
+                _DbContext.Types.Remove(type);
+                _DbContext.SaveChanges();
+            }
+            
         }
     }
 }

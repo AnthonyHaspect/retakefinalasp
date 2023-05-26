@@ -6,6 +6,6 @@
         public Question GetById(int id);
         public void Ajouter(Question question); 
         public void Modifier(Question question);
-        public void Supprimer(Question question);
+        public void Supprimer(int id);
     }
 }

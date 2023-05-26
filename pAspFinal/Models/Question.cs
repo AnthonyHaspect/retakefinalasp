@@ -6,8 +6,10 @@ namespace pAspFinal.Models
     {
         public int Id { get; set; }
         [Required]
+        [StringLength(100)]
         public string Titre { get; set; }//est la question en tant que telle
         public List<Choix>? Choix { get; set; }//est le choix des réponse si la questions a des choix
+        [StringLength(100)]
         public string? Commentaire { get; set; }//les précision
         public string? ParDefault { get; set; }
         public int? ParentID { get; set; }//clé étrangère qui li la question a son parent (peut être null)

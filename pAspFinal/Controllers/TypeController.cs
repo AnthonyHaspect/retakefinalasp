@@ -27,7 +27,7 @@ namespace pAspFinal.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ViewResult DetailsType(int id)
+        public ViewResult Details(int id)
         {
             Models.Type type = _LesTypes.GetById(id);
 
@@ -73,7 +73,21 @@ namespace pAspFinal.Controllers
         public RedirectToActionResult Modifier(Models.Type type)
         {
             _LesTypes.Modifier(type);
-            return RedirectToAction(nameof(DetailsType), new {id = type.Id});
+            return RedirectToAction(nameof(Details), new {id = type.Id});
+        }
+
+
+        /// <summary>
+        /// Supprime un type
+        /// probablement ne vont pas être utiliser
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>retourne la vue liste</returns>
+        [HttpPost]
+        public RedirectToActionResult Supprimer(int id)
+        {
+            _LesTypes.Supprimer(id);
+            return RedirectToAction(nameof(Liste));
         }
     }
 }

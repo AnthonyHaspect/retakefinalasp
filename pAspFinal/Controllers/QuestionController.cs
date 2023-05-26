@@ -18,7 +18,7 @@ namespace pAspFinal.Controllers
         }
 
 
-        public ViewResult DetailsQuestion(int id)
+        public ViewResult Details(int id)
         {
             Question question = _LesQuestions.GetById(id);
 
@@ -53,7 +53,7 @@ namespace pAspFinal.Controllers
         public RedirectToActionResult Modifier(Question question)
         {
             _LesQuestions.Modifier(question);
-            return RedirectToAction(nameof(DetailsQuestion), new { id = question.Id });
+            return RedirectToAction(nameof(Details), new { id = question.Id });
         }
     }
 }

@@ -12,6 +12,6 @@
         //probablement pas utiliser modifier car ce n'est pas une chose pour un utilisateur normal mais seulement pour l'affichage html
         public void Modifier(Type type);
         //supprimer
-        public void Supprimer(Type type);
+        public void Supprimer(int id);
     }
 }
