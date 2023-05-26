@@ -6,7 +6,7 @@ namespace pAspFinal.ViewModels
     public class RolesUtilisateurViewModel
     {
         public IdentityRole Role { get; set; }
-        public IdentityUser User { get; set; }
-        public 
+        public Utilisateur User { get; set; }
+        
     }
 }

@@ -18,7 +18,7 @@ builder.Services.AddDbContext<pAspFinal_dbContext>(options => {
     options.UseSqlServer(builder.Configuration["ConnectionStrings:pAspFinal_dbContextConnection"]);
 });
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddIdentity<Utilisateur, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<pAspFinal_dbContext>().AddDefaultUI().AddDefaultTokenProviders();
 
 
@@ -43,6 +43,6 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-InitialiseurDB.Seed(app);
+//InitialiseurDB.Seed(app);
 
 app.Run();

@@ -12,7 +12,7 @@ namespace pAspFinal.Models
 
         public DbSet<Formulaire> Formulaires { get; set; }
         public DbSet<Utilisateur> Utilisateurs { get; set; }
-        public DbSet<Role> Roles { get; set; }
+        //public DbSet<Role> Roles { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<Section> Sections { get; set; }
         public DbSet<Type> Types { get; set; }

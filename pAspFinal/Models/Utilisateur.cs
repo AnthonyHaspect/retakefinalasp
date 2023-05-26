@@ -10,8 +10,8 @@ namespace pAspFinal.Models
         public string Nom { get; set; }
         [Required]
         public string Compagnie { get; set; }
-        public int RoleId { get; set; }
-        public Role Role { get; set; }
+        //public int RoleId { get; set; }
+        //public Role Role { get; set; }
         public List<Formulaire> Formulaire { get; set; }
     }
 }

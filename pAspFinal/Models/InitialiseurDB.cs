@@ -126,7 +126,7 @@ namespace pAspFinal.Models
 
         };
 
-        public static List<Role> _Roles = new List<Role>
+        /*public static List<Role> _Roles = new List<Role>
         {
             new Role {Nom = "Admin"},
             new Role {Nom = "Utilisateur"},
@@ -144,13 +144,13 @@ namespace pAspFinal.Models
                 }
                 return _NomRoles;
             }
-        }
+        }*/
         public static List<Utilisateur> _Utilisateur = new List<Utilisateur>
         {
-            new Utilisateur { Nom = "Administrateur1", Compagnie = "Admin", Role = NomRoles["Admin"] },
-            new Utilisateur { Nom = "Utilisateur1", Compagnie = "Cegep Outaouiais", Role = NomRoles["Utilisateur"] },
-            new Utilisateur { Nom = "Anthony", Compagnie = "NET", Role = NomRoles["Utilisateur"] },
-            new Utilisateur { Nom = "Haspect", Compagnie = "ORG", Role = NomRoles["Utilisateur"] }
+            new Utilisateur { Nom = "Administrateur1", Compagnie = "Admin", /*Role = NomRoles["Admin"]*/ },
+            new Utilisateur { Nom = "Utilisateur1", Compagnie = "Cegep Outaouiais", /*Role = NomRoles["Utilisateur"]*/ },
+            new Utilisateur { Nom = "Anthony", Compagnie = "NET", /*Role = NomRoles["Utilisateur"]*/ },
+            new Utilisateur { Nom = "Haspect", Compagnie = "ORG", /*Role = NomRoles["Utilisateur"]*/ }
         };
 
         public static List<Formulaire> _Formulaire = new List<Formulaire>
@@ -173,11 +173,11 @@ namespace pAspFinal.Models
                 pAspFinal_DbContext.Utilisateurs.AddRange(_Utilisateur);
                 pAspFinal_DbContext.SaveChanges();
             }
-            if (!pAspFinal_DbContext.Roles.Any())
+            /*if (!pAspFinal_DbContext.Roles.Any())
             {
                 pAspFinal_DbContext.Roles.AddRange(NomRoles.Values);
                 pAspFinal_DbContext.SaveChanges();
-            }
+            }*/
             if (!pAspFinal_DbContext.Questions.Any())
             {
                 pAspFinal_DbContext.Questions.AddRange(_Questions);

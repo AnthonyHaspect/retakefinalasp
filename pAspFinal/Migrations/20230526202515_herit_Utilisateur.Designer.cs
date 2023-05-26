@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using pAspFinal.Models;
 
@@ -11,9 +12,10 @@ using pAspFinal.Models;
 namespace pAspFinal.Migrations
 {
     [DbContext(typeof(pAspFinal_dbContext))]
-    partial class pAspFinal_dbContextModelSnapshot : ModelSnapshot
+    [Migration("20230526202515_herit_Utilisateur")]
+    partial class herit_Utilisateur
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,6 +63,10 @@ namespace pAspFinal.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -77,6 +83,8 @@ namespace pAspFinal.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityRole");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -355,6 +363,12 @@ namespace pAspFinal.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RoleId1")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -378,7 +392,20 @@ namespace pAspFinal.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
+                    b.HasIndex("RoleId1");
+
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("pAspFinal.Models.Role", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityRole");
+
+                    b.Property<string>("Nom")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasDiscriminator().HasValue("Role");
                 });
 
             modelBuilder.Entity("FormulaireQuestion", b =>
@@ -498,6 +525,15 @@ namespace pAspFinal.Migrations
                     b.Navigation("Type");
                 });
 
+            modelBuilder.Entity("pAspFinal.Models.Utilisateur", b =>
+                {
+                    b.HasOne("pAspFinal.Models.Role", "Role")
+                        .WithMany("Utilisateurs")
+                        .HasForeignKey("RoleId1");
+
+                    b.Navigation("Role");
+                });
+
             modelBuilder.Entity("pAspFinal.Models.Question", b =>
                 {
                     b.Navigation("Children");
@@ -513,6 +549,11 @@ namespace pAspFinal.Migrations
             modelBuilder.Entity("pAspFinal.Models.Type", b =>
                 {
                     b.Navigation("Questions");
+                });
+
+            modelBuilder.Entity("pAspFinal.Models.Role", b =>
+                {
+                    b.Navigation("Utilisateurs");
                 });
 #pragma warning restore 612, 618
         }

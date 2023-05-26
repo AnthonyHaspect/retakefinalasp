@@ -7,10 +7,10 @@ namespace pAspFinal.Controllers
 {
     public class RolesController : Controller
     {
-        private RoleManager<Role> _roleManager;
+        private RoleManager<IdentityRole> _roleManager;
         private UserManager<Utilisateur> _userManager;
 
-        public RolesController(RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager)
+        public RolesController(RoleManager<IdentityRole> roleManager, UserManager<Utilisateur> userManager)
         {
             _roleManager = roleManager;
             _userManager = userManager;
@@ -82,10 +82,10 @@ namespace pAspFinal.Controllers
         {
             IdentityRole role = await _roleManager.FindByIdAsync(id);
 
-            IList<IdentityUser> membres = new List<IdentityUser>();
-            List<IdentityUser> nonMembres = new List<IdentityUser>();
+            IList<Utilisateur> membres = new List<Utilisateur>();
+            List<Utilisateur> nonMembres = new List<Utilisateur>();
 
-            List<IdentityUser> listeUsagers = _userManager.Users.ToList();
+            List<Utilisateur> listeUsagers = _userManager.Users.ToList();
 
             membres = await _userManager.GetUsersInRoleAsync(role.Name);
             nonMembres = _userManager.Users.Where(user => !membres.Contains(user)).ToList();
@@ -93,8 +93,8 @@ namespace pAspFinal.Controllers
             RolesUtilisateurViewModel membresRoleVM = new RolesUtilisateurViewModel
             {
                 Role = role,
-                NonMembres = nonMembres,
-                Membres = membres
+                //NonMembres = nonMembres,
+                //Membres = membres
             };
 
             return View(membresRoleVM);
@@ -107,7 +107,7 @@ namespace pAspFinal.Controllers
 
             if (ModelState.IsValid)
             {
-                IdentityUser user = await _userManager.FindByIdAsync(userId);
+                Utilisateur user = await _userManager.FindByIdAsync(userId);
                 IdentityRole role = await _roleManager.FindByIdAsync(roleId);
 
                 if (user != null && role != null)
