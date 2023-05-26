@@ -5,7 +5,7 @@ namespace pAspFinal.Models
 {
     public class Utilisateur : IdentityUser
     {
-        public int Id { get; set; }
+        public int UtilisateurId { get; set; }
         [Required]
         public string Nom { get; set; }
         [Required]

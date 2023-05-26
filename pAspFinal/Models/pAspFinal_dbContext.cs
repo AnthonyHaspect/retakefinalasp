@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace pAspFinal.Models
 {
-    public class pAspFinal_dbContext : IdentityDbContext
+    public class pAspFinal_dbContext : IdentityDbContext<Utilisateur>
     {
         public pAspFinal_dbContext(DbContextOptions<pAspFinal_dbContext> options) : base(options) 
         {
