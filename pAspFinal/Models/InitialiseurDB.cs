@@ -93,7 +93,7 @@ namespace pAspFinal.Models
                 Commentaire = "test1",
                 ParDefault = "test1",
                 Choix = _Choix1,
-                Section = NomSection["Sécurité informatique"],
+                Section = NomSection["Coté Employeur"],
                 Type = NomType["Choisir X"]
             },            
             new Question
@@ -102,7 +102,7 @@ namespace pAspFinal.Models
                 Commentaire = "test2",
                 ParDefault = "test2",
                 Choix = _Choix2,
-                Section = NomSection["Sécurité informatique"],
+                Section = NomSection["Coté Employées"],
                 Type = NomType["Choisir 1"]
             },            
             new Question
@@ -111,7 +111,7 @@ namespace pAspFinal.Models
                 Commentaire = "test3",
                 ParDefault = "test3",
                 Choix = _Choix3,
-                Section = NomSection["Sécurité informatique"],
+                Section = NomSection["Sécurité Physique"],
                 Type = NomType["Choisir 1"]
             },            
             new Question

@@ -20,26 +20,31 @@ namespace pAspFinal.Controllers
         {
             return View(_roleManager.Roles);
         }
-
+        [HttpGet]
         public IActionResult Creer()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Creer(string nom)
+        public async Task<IActionResult> Creer(CreerRolesViewModel model)
         {
-            IdentityRole role = await _roleManager.FindByNameAsync(nom);
+            IdentityRole role = await _roleManager.FindByNameAsync(model.RoleName);
 
             if (role != null)
             {
-                ModelState.AddModelError(nom, "Ce nom de rôle existe déjà, veuillez choisir un autre.");
-                return View(nameof(Creer), nom);
+                ModelState.AddModelError(model.RoleName, "Ce nom de rôle existe déjà, veuillez choisir un autre.");
+                return View(nameof(Creer), model.RoleName);
             }
 
             if (ModelState.IsValid)
             {
-                IdentityResult result = await _roleManager.CreateAsync(new IdentityRole(nom));
+                IdentityRole nvRole = new IdentityRole
+                {
+                    Name = model.RoleName
+                };
+
+                IdentityResult result = await _roleManager.CreateAsync(nvRole);
 
                 if (result.Succeeded)
                     return RedirectToAction("Index");
@@ -52,7 +57,7 @@ namespace pAspFinal.Controllers
                 }
             }
 
-            return View(nameof(Creer), nom);
+            return View(nameof(Creer), model);
         }
 
         public async Task<IActionResult> Supprimer(string id)

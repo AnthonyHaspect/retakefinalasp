@@ -52,6 +52,7 @@ namespace pAspFinal.Controllers
         [HttpPost]
         public IActionResult Ajouter(AjouterQuestionViewModel question)
         {
+            var choix = Request.Form["nouveauChamp"];
             if (ModelState.IsValid)
             {
                 //si le id est 0 on créer un nouvelle item

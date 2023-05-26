@@ -29,27 +29,108 @@
             </div>
             <div class="form-group">
                 <label asp-for="Question.ParentID" class="control-label"></label>
-                <select asp-for="Question.ParentID" class="form-control" asp-items="ViewBag.ParentID"></select>
+                <input asp-for="Question.ParentID" class="form-control" />
+                @*<select asp-for="Question.ParentID" class="form-control" asp-items="ViewBag.ParentID"></select>*@
             </div>
             <div class="form-group">
                 <label asp-for="Question.TypeID" class="control-label"></label>
-                <select asp-for="Question.TypeID" class="form-control" asp-items="ViewBag.TypeID"></select>
+                <input asp-for="Question.TypeID" class="form-control" />
+                @*<select asp-for="Question.TypeID" class="form-control" asp-items="ViewBag.TypeID"></select>*@
             </div>
             <div class="form-group">
                 <label asp-for="Question.SectionID" class="control-label"></label>
-                <select asp-for="Question.SectionID" class="form-control" asp-items="ViewBag.SectionID"></select>
+                <input asp-for="Question.SectionID" class="form-control" />
+                @*<select asp-for="Question.SectionID" class="form-control" asp-items="ViewBag.SectionID"></select>*@
+            </div>
+            <div id="Choix">
+                <div class="form-group">
+                    <label class="control-label">Réponse/Choix</label>
+                    <input type="text" name="nouveauChamp" class="form-control" />
+                </div>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
+        <div>
+            <button id="ajoutChoixChamp" class="btn btn-secondary">Ajouter un choix</button>
+        </div>
+        <div>            
+            <a asp-action="Liste">Retoure à la liste des questions</a>
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+        <table class="table">
+            <thead>
+                <h3 class="h5">Type</h3>
+                <tr>
+                    <th>
+                        Nom
+                    </th>
+                    <th>
+                        Id
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Types)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nom)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+    </div>
+    <div class="col-md-3">
+        <table class="table">
+            <thead>
+                <h3 class="h5">Section</h3>
+                <tr>
+                    <th>
+                        Nom
+                    </th>
+                    <th>
+                        Id
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Sections)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nom)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $(document).ready(function(){
+            $('#ajoutChoixChamp').click(function(){
+                var nvChamp = $('<div class="form-group"><input type="text" name="nouveauChamp" class="form-control"/></div>')
+                $('#Choix').append(nvChamp);
+            });
+        });
+    </script>
 }
