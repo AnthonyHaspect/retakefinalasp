@@ -11,8 +11,6 @@ namespace pAspFinal.Controllers
             this._LesQuestions = lesQuestions;
         }
 
-
-
         public ViewResult Liste()
         {
             ViewBag.Titre = "Les questions";

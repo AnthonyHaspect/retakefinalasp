@@ -6,6 +6,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddScoped<IQuestionRepository, BDQuestionRepository>();
+builder.Services.AddScoped<ISectionRepository, BDSectionRepository>();
+builder.Services.AddScoped<ITypeRepository, BDTypeRepository>();
+builder.Services.AddScoped<IFormulaireRepository, BDFormulaireRepository>();
+
 builder.Services.AddDbContext<pAspFinal_dbContext>(options => {
     options.UseSqlServer(builder.Configuration["ConnectionStrings:pAspFinal_dbContextConnection"]);
 });
