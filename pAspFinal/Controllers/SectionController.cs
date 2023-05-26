@@ -57,5 +57,12 @@ namespace pAspFinal.Controllers
             _LesSections.Modifier(section);
             return RedirectToAction(nameof(DetailsSection), new { id = section.Id });
         }
+
+        [HttpPost]
+        public RedirectToActionResult Supprimer(int id)
+        {
+            _LesSections.Supprimer(id);
+            return RedirectToAction(nameof(Liste));
+        }
     }
 }

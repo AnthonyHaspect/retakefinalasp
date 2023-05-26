@@ -16,6 +16,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = I:\aspFinal\sAspFinal\pAspFinal
 build_property._RazorSourceGeneratorDebug = 
 
+[I:/aspFinal/sAspFinal/pAspFinal/Views/Formulaire/Liste.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9ybXVsYWlyZVxMaXN0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [I:/aspFinal/sAspFinal/pAspFinal/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -32,12 +36,28 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXVlc3Rpb25cTGlzdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[I:/aspFinal/sAspFinal/pAspFinal/Views/Section/Ajouter.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VjdGlvblxBam91dGVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[I:/aspFinal/sAspFinal/pAspFinal/Views/Section/Liste.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VjdGlvblxMaXN0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [I:/aspFinal/sAspFinal/pAspFinal/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [I:/aspFinal/sAspFinal/pAspFinal/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[I:/aspFinal/sAspFinal/pAspFinal/Views/Type/Ajouter.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHlwZVxBam91dGVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[I:/aspFinal/sAspFinal/pAspFinal/Views/Type/Liste.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHlwZVxMaXN0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [I:/aspFinal/sAspFinal/pAspFinal/Views/_ViewImports.cshtml]

@@ -33,10 +33,15 @@
             _DbContext.SaveChanges();
         }
 
-        public void Supprimer(Section section)
+        public void Supprimer(int id)
         {
-            _DbContext.Sections.Remove(section);
-            _DbContext.SaveChanges();
+            Section section = _DbContext.Sections.FirstOrDefault(s => s.Id == id);
+            if (section != null)
+            {
+                _DbContext.Sections.Remove(section);
+                _DbContext.SaveChanges();
+
+            }
         }
     }
 }

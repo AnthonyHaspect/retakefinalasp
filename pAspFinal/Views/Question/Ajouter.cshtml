@@ -1,43 +1,43 @@
-﻿@model pAspFinal.Models.Question
+﻿@model pAspFinal.ViewModels.AjouterQuestionViewModel
 
 @{
-    ViewData["Title"] = "Ajouter";
+    ViewData["Title"] = ViewBag.Titre;
 }
 
 <h1>Ajouter</h1>
 
-<h4>Question</h4>
+<h2>Question</h2>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Ajouter">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Titre" class="control-label"></label>
-                <input asp-for="Titre" class="form-control" />
-                <span asp-validation-for="Titre" class="text-danger"></span>
+                <label asp-for="Question.Titre" class="control-label">Le titre de la question: </label>
+                <input asp-for="Question.Titre" class="form-control" />
+                <span asp-validation-for="Question.Titre" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Commentaire" class="control-label"></label>
-                <input asp-for="Commentaire" class="form-control" />
-                <span asp-validation-for="Commentaire" class="text-danger"></span>
+                <label asp-for="Question.Commentaire" class="control-label"></label>
+                <input asp-for="Question.Commentaire" class="form-control" />
+                <span asp-validation-for="Question.Commentaire" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ParDefault" class="control-label"></label>
-                <input asp-for="ParDefault" class="form-control" />
-                <span asp-validation-for="ParDefault" class="text-danger"></span>
+                <label asp-for="Question.ParDefault" class="control-label"></label>
+                <input asp-for="Question.ParDefault" class="form-control" />
+                <span asp-validation-for="Question.ParDefault" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ParentID" class="control-label"></label>
-                <select asp-for="ParentID" class ="form-control" asp-items="ViewBag.ParentID"></select>
+                <label asp-for="Question.ParentID" class="control-label"></label>
+                <select asp-for="Question.ParentID" class="form-control" asp-items="ViewBag.ParentID"></select>
             </div>
             <div class="form-group">
-                <label asp-for="TypeID" class="control-label"></label>
-                <select asp-for="TypeID" class ="form-control" asp-items="ViewBag.TypeID"></select>
+                <label asp-for="Question.TypeID" class="control-label"></label>
+                <select asp-for="Question.TypeID" class="form-control" asp-items="ViewBag.TypeID"></select>
             </div>
             <div class="form-group">
-                <label asp-for="SectionID" class="control-label"></label>
-                <select asp-for="SectionID" class ="form-control" asp-items="ViewBag.SectionID"></select>
+                <label asp-for="Question.SectionID" class="control-label"></label>
+                <select asp-for="Question.SectionID" class="form-control" asp-items="ViewBag.SectionID"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

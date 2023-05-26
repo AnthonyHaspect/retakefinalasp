@@ -36,10 +36,15 @@ namespace pAspFinal.Models
             _DbContext.SaveChanges();
         }
 
-        public void Supprimer(Formulaire formulaire)
+        public void Supprimer(int id)
         {
-            _DbContext.Formulaires.Remove(formulaire);
-            _DbContext.SaveChanges();
+            Formulaire formulaire = _DbContext.Formulaires.FirstOrDefault(f => f.Id == id);
+            if (formulaire != null)
+            {
+                _DbContext.Formulaires.Remove(formulaire);
+                _DbContext.SaveChanges();
+            }
+
         }
     }
 }

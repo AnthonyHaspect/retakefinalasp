@@ -15,11 +15,4 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.13" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Formulaire\" />
-    <Folder Include="Views\Role\" />
-    <Folder Include="Views\Type\" />
-    <Folder Include="Views\Section\" />
-  </ItemGroup>
-
 </Project>
