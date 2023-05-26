@@ -13,7 +13,7 @@ namespace pAspFinal.Models
         {
             get
             {
-                return _DbContext.Questions.OrderBy(q => q.Id).ToList();
+                return _DbContext.Questions.Include(x => x.Section).Include(c => c.Type).Include(q => q.Parent).OrderBy(q => q.Id).ToList();
             }
         }
 
