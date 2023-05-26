@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace pAspFinal.Models
 {
-    public class Role
+    public class Role : IdentityRole
     {
         public int Id { get; set; }
         [Required]

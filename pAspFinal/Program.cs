@@ -1,7 +1,10 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using pAspFinal.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("pAspFinal_dbContextConnection") ?? throw new InvalidOperationException("Connection string 'pAspFinal_dbContextConnection' not found.");
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -15,6 +18,11 @@ builder.Services.AddDbContext<pAspFinal_dbContext>(options => {
     options.UseSqlServer(builder.Configuration["ConnectionStrings:pAspFinal_dbContextConnection"]);
 });
 
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<pAspFinal_dbContext>().AddDefaultUI().AddDefaultTokenProviders();
+
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -27,8 +35,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
+app.MapRazorPages();
 
 app.MapControllerRoute(
     name: "default",

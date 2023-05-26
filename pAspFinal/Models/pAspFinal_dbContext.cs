@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace pAspFinal.Models
 {
-    public class pAspFinal_dbContext : DbContext
+    public class pAspFinal_dbContext : IdentityDbContext
     {
         public pAspFinal_dbContext(DbContextOptions<pAspFinal_dbContext> options) : base(options) 
         {
