@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using pAspFinal.Models;
 
@@ -11,9 +12,10 @@ using pAspFinal.Models;
 namespace pAspFinal.Migrations
 {
     [DbContext(typeof(pAspFinal_dbContext))]
-    partial class pAspFinal_dbContextModelSnapshot : ModelSnapshot
+    [Migration("20230527005844_MigrationChoixChange")]
+    partial class MigrationChoixChange
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

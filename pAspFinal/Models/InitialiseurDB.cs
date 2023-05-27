@@ -50,32 +50,7 @@ namespace pAspFinal.Models
                 return _NomType;
             }
         }
-        public static List<Choix> _Choix1 = new List<Choix>()
-        {
-            new Choix{Options = "Test1Q1"},
-            new Choix{Options = "Test2Q1"},
-            new Choix{Options = "Test3Q1"},
-        };
-        public static List<Choix> _Choix2 = new List<Choix>()
-        {
-            new Choix{Options = "Test1Q2"},
-            new Choix{Options = "Test2Q2"},
-            new Choix{Options = "Test3Q2"},
-            new Choix{Options = "Test4Q2"},
-        };
-        public static List<Choix> _Choix3 = new List<Choix>()
-        {
-            new Choix{Options = "Test1Q3"},
-            new Choix{Options = "Test2Q3"},
-            new Choix{Options = "Test3Q3"},
-            new Choix{Options = "Test4Q3"},
-            new Choix{Options = "Test5Q3"},
-        };
-        public static List<Choix> _Choix4 = new List<Choix>()
-        {
-            new Choix{Options = "Test1Q4"},
-            new Choix{Options = "Test2Q4"}
-        };
+        
 
         public static List<Question> _Questions = new List<Question>
         {
@@ -92,7 +67,7 @@ namespace pAspFinal.Models
                 Titre = "test1",
                 Commentaire = "test1",
                 ParDefault = "test1",
-                Choix = _Choix1,
+                Choix = new List<Choix>{ },
                 Section = NomSection["Coté Employeur"],
                 Type = NomType["Choisir X"]
             },            
@@ -101,7 +76,7 @@ namespace pAspFinal.Models
                 Titre = "test2",
                 Commentaire = "test2",
                 ParDefault = "test2",
-                Choix = _Choix2,
+                Choix = new List<Choix>{ },
                 Section = NomSection["Coté Employées"],
                 Type = NomType["Choisir 1"]
             },            
@@ -110,7 +85,7 @@ namespace pAspFinal.Models
                 Titre = "test3",
                 Commentaire = "test3",
                 ParDefault = "test3",
-                Choix = _Choix3,
+                Choix = new List<Choix>{ },
                 Section = NomSection["Sécurité Physique"],
                 Type = NomType["Choisir 1"]
             },            
@@ -119,38 +94,51 @@ namespace pAspFinal.Models
                 Titre = "test4 pour choisir liste",
                 Commentaire = "le commentaire pour la question sur choisir liste",
                 ParDefault = "test4",
-                Choix = _Choix4,
+                Choix = new List<Choix>{ },
                 Section = NomSection["Sécurité informatique"],
                 Type = NomType["Choisir liste"]
             }
 
         };
 
-        /*public static List<Role> _Roles = new List<Role>
-        {
-            new Role {Nom = "Admin"},
-            new Role {Nom = "Utilisateur"},
-            new Role {Nom = "temporaire"},
-        };
-        private static Dictionary<string, Role> _NomRoles;
-        public static Dictionary<string, Role> NomRoles
+        private static Dictionary<string, Question> _TitreQuestion;
+        public static Dictionary<string, Question> TitreQuestion
         {
             get
             {
-                _NomRoles = new Dictionary<string, Role>();
-                foreach (Role roles in _Roles)
+                _TitreQuestion = new Dictionary<string, Question>();
+                foreach (Question question in _Questions)
                 {
-                    _NomRoles.Add(roles.Nom, roles);
+                    _TitreQuestion.Add(question.Titre, question);
                 }
-                return _NomRoles;
+                return _TitreQuestion;
             }
-        }*/
+        }
+
+        public static List<Choix> _Choix = new List<Choix>()
+        {
+            new Choix{Options = "Test1Q1", Question = TitreQuestion["test1"]},
+            new Choix{Options = "Test2Q1", Question = TitreQuestion["test1"]},
+            new Choix{Options = "Test3Q1", Question = TitreQuestion["test1"]},
+            new Choix{Options = "Test1Q2", Question = TitreQuestion["test2"]},
+            new Choix{Options = "Test2Q2", Question = TitreQuestion["test2"]},
+            new Choix{Options = "Test3Q2", Question = TitreQuestion["test2"]},
+            new Choix{Options = "Test4Q2", Question = TitreQuestion["test2"]},
+            new Choix{Options = "Test1Q3", Question = TitreQuestion["test3"]},
+            new Choix{Options = "Test2Q3", Question = TitreQuestion["test3"]},
+            new Choix{Options = "Test3Q3", Question = TitreQuestion["test3"]},
+            new Choix{Options = "Test4Q3", Question = TitreQuestion["test3"]},
+            new Choix{Options = "Test5Q3", Question = TitreQuestion["test3"]},
+            new Choix{Options = "Test1Q4", Question = TitreQuestion["test4"]},
+            new Choix{Options = "Test2Q4", Question = TitreQuestion["test1"]}
+        };
+
         public static List<Utilisateur> _Utilisateur = new List<Utilisateur>
         {
-            new Utilisateur { Nom = "Administrateur1", Compagnie = "Admin", /*Role = NomRoles["Admin"]*/ },
-            new Utilisateur { Nom = "Utilisateur1", Compagnie = "Cegep Outaouiais", /*Role = NomRoles["Utilisateur"]*/ },
-            new Utilisateur { Nom = "Anthony", Compagnie = "NET", /*Role = NomRoles["Utilisateur"]*/ },
-            new Utilisateur { Nom = "Haspect", Compagnie = "ORG", /*Role = NomRoles["Utilisateur"]*/ }
+            new Utilisateur { Nom = "Administrateur1", Compagnie = "Admin"},
+            new Utilisateur { Nom = "Utilisateur1", Compagnie = "Cegep Outaouiais"},
+            new Utilisateur { Nom = "Anthony", Compagnie = "NET"},
+            new Utilisateur { Nom = "Haspect", Compagnie = "ORG"}
         };
 
         public static List<Formulaire> _Formulaire = new List<Formulaire>
@@ -191,6 +179,11 @@ namespace pAspFinal.Models
             if (!pAspFinal_DbContext.Types.Any())
             {
                 pAspFinal_DbContext.Types.AddRange(NomType.Values);
+                pAspFinal_DbContext.SaveChanges();
+            }
+            if (!pAspFinal_DbContext.Choixs.Any())
+            {
+                pAspFinal_DbContext.Choixs.AddRange(_Choix);
                 pAspFinal_DbContext.SaveChanges();
             }
 

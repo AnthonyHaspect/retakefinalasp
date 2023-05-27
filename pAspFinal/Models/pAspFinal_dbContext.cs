@@ -16,7 +16,7 @@ namespace pAspFinal.Models
         public DbSet<Question> Questions { get; set; }
         public DbSet<Section> Sections { get; set; }
         public DbSet<Type> Types { get; set; }
-
+        public DbSet<Choix> Choixs { get; set; }
 
     }
 }

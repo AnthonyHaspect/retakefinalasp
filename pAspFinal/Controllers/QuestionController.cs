@@ -85,7 +85,7 @@ namespace pAspFinal.Controllers
             { Question = question,
                 Questions = _dbContext.Questions.ToList(),
                 Sections = _dbContext.Sections.ToList(),
-                Types = _dbContext.Types.ToList()
+                Types = _dbContext.Types.ToList(),
             };
             return View("Ajouter", viewModel);
         }

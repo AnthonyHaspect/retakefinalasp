@@ -10,11 +10,11 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Ajouter">
+        <form id="formulaireQuestion" asp-action="Ajouter">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Question.Titre" class="control-label">Le titre de la question: </label>
-                <input asp-for="Question.Titre" class="form-control" />
+                <input asp-for="Question.Titre" class="form-control" aria-required="true" />
                 <span asp-validation-for="Question.Titre" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -29,24 +29,41 @@
             </div>
             <div class="form-group">
                 <label asp-for="Question.ParentID" class="control-label"></label>
-                <input asp-for="Question.ParentID" class="form-control" />
+                <input asp-for="Question.ParentID" class="form-control" aria-required="false" />
                 @*<select asp-for="Question.ParentID" class="form-control" asp-items="ViewBag.ParentID"></select>*@
             </div>
             <div class="form-group">
                 <label asp-for="Question.TypeID" class="control-label"></label>
-                <input asp-for="Question.TypeID" class="form-control" />
+                <input asp-for="Question.TypeID" class="form-control" aria-required="true" />
                 @*<select asp-for="Question.TypeID" class="form-control" asp-items="ViewBag.TypeID"></select>*@
             </div>
             <div class="form-group">
                 <label asp-for="Question.SectionID" class="control-label"></label>
-                <input asp-for="Question.SectionID" class="form-control" />
+                <input asp-for="Question.SectionID" class="form-control" aria-required="true" />
                 @*<select asp-for="Question.SectionID" class="form-control" asp-items="ViewBag.SectionID"></select>*@
             </div>
             <div id="Choix">
+                @*Référence https://stackoverflow.com/questions/53813579/populate-a-listobject-in-my-model-from-the-view-asp-net-core - ryan*@
+            @if (Model.Question.Id != 0) 
+            {
+                int i = 0;
+                @foreach (var c in Model.Question.Choix)
+                {
+
+                    <div class="form-group">
+                        <label class="control-label">Réponse/Choix : @i</label>
+                            <input type="text" asp-for="Question.Choix" name="Question.Choix[@i].Options" value="@c.Options" required class="items form-control" />
+                    </div>
+                    i++;
+                }
+            }
+            @if (Model.Question.Id == 0)
+            {
                 <div class="form-group">
                     <label class="control-label">Réponse/Choix</label>
-                    <input type="text" name="nouveauChamp" class="form-control" />
+                        <input type="text" asp-for="Question.Choix" name="Question.Choix[0].Options" required class="items form-control" />
                 </div>
+            }
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -118,7 +135,35 @@
         </table>
     </div>
 </div>
-
+<div>
+    <div class="col-md-4">
+        <table class="table">
+            <thead>
+                <h3 class="h5">Liste des Questions</h3>
+                <tr>
+                    <th>
+                        Titre
+                    </th>
+                    <th>
+                        Id
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Questions)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Titre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+    </div>
+</div>
 
 
 
@@ -127,10 +172,23 @@
 
     <script>
         $(document).ready(function(){
-            $('#ajoutChoixChamp').click(function(){
-                var nvChamp = $('<div class="form-group"><input type="text" name="nouveauChamp" class="form-control"/></div>')
+            $('#ajoutChoixChamp').click(function(e){
+                e.preventDefault();
+                var i = ($(".items").length)
+                var nvChamp = $(' <label class="control-label">Réponse/Choix : '+i+'</label>' + 
+                '<input type="text" name="Choix[' + i + ']" class="items form-control"/>')
                 $('#Choix').append(nvChamp);
             });
+            @*$("#questionForm").submit(function () {
+
+                var choix = [];
+                $("input[name='nouveauChamp']").each(function () {
+                    choix.push($(this).val());
+                });
+
+                var hiddenField = '<input type="hidden" name="Choix[0].Options" value=\'' + choixData + '\' />';
+                $(this).append(hiddenField);
+            });*@
         });
     </script>
 }
