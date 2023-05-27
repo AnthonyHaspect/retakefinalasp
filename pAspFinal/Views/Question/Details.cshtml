@@ -22,6 +22,15 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Commentaire)
         </dd>
+        @foreach ( var i in Model.Choix)
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(Choix => i.Options)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(Choix => i.Options)
+            </dd>
+        }
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ParDefault)
         </dt>
@@ -55,6 +64,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Modifier" asp-route-id="@Model?.Id">Modifier la question</a> |
-    <a asp-action="Liste">Retour à la liste</a>
+    <a asp-action="Modifier" asp-route-id="@Model?.Id">Modifier cette question</a> |
+    <a asp-action="Liste">Retour à la liste des questions</a>
 </div>

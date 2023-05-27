@@ -117,6 +117,7 @@ namespace pAspFinal.Models
 
         public static List<Choix> _Choix = new List<Choix>()
         {
+            new Choix{Options="test0", Question = TitreQuestion["test"]},
             new Choix{Options = "Test1Q1", Question = TitreQuestion["test1"]},
             new Choix{Options = "Test2Q1", Question = TitreQuestion["test1"]},
             new Choix{Options = "Test3Q1", Question = TitreQuestion["test1"]},
