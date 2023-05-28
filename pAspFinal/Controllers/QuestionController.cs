@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using pAspFinal.Models;
 using pAspFinal.ViewModels;
 
@@ -50,28 +51,28 @@ namespace pAspFinal.Controllers
         /// <param name="question"></param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult Ajouter(AjouterQuestionViewModel question)
+        public IActionResult Ajouter(Question question)
         {
-            var choix = Request.Form["nouveauChamp"];
-            if (ModelState.IsValid)
-            {
+            //_LesQuestions.Modifier(question);
+            //_dbContext.SaveChanges();
+            //if (ModelState.IsValid)
+            //{
                 //si le id est 0 on créer un nouvelle item
-                if (question.Question.Id == 0)
+                if (question.Id == 0)
                 {
-                    Question Enquestion = question.Question;
-                    _LesQuestions.Ajouter(Enquestion);
+                    _LesQuestions.Ajouter(question);
                 }
                 //si le id est pas 0 on chercher pour une question avec le meme id et on le modifi
                 else
                 {
-                    Question EnQuestion = _dbContext.Questions.Find(question.Question.Id);
-                    if (EnQuestion != null)
+                    //Question EnQuestion = _dbContext.Questions.Find(question.Id);
+                    if (question.Id != 0)
                     {
-                        return NotFound();
+                    _LesQuestions.Modifier(question);
                     }
-                    _LesQuestions.Modifier(EnQuestion);
+
                 }
-            }
+            //}
             return RedirectToAction(nameof(Liste));
         }
 
@@ -99,9 +100,12 @@ namespace pAspFinal.Controllers
         }*/
 
 
-        [HttpPost]
-        public RedirectToActionResult Supprimer(int id)
+        [HttpGet]
+        public async Task<IActionResult> Supprimer(int id)
         {
+            //var question = await _dbContext.Questions.FindAsync(id);
+            //_dbContext.Questions.Remove(question);
+           // await _dbContext.SaveChangesAsync();
             _LesQuestions.Supprimer(id);
             return RedirectToAction(nameof(Liste));
         }

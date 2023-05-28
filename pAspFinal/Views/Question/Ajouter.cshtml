@@ -12,6 +12,7 @@
     <div class="col-md-4">
         <form id="formulaireQuestion" asp-action="Ajouter">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Question.Id" />
             <div class="form-group">
                 <label asp-for="Question.Titre" class="control-label">Le titre de la question: </label>
                 <input asp-for="Question.Titre" class="form-control" aria-required="true" />
@@ -46,27 +47,27 @@
                 @*Référence https://stackoverflow.com/questions/53813579/populate-a-listobject-in-my-model-from-the-view-asp-net-core - ryan*@
             @if (Model.Question.Id != 0) 
             {
-                int i = 0;
-                @foreach (var c in Model.Question.Choix)
+                
+                @for (int i = 0; i < Model.Question.Choix.Count; i++)
                 {
 
                     <div class="form-group">
-                        <label class="control-label">Réponse/Choix : @i</label>
-                            <input type="text" asp-for="Question.Choix" name="Question.Choix[@i].Options" value="@c.Options" required class="items form-control" />
+                        <label class="control-label items">Réponse/Choix : @i</label>
+                        @Html.EditorFor(x => x.Question.Choix[i].Options)
+                            @*<input type="text" asp-for="Question.Choix" value="@c.Options" required class="items form-control" />*@
                     </div>
-                    i++;
                 }
             }
             @if (Model.Question.Id == 0)
             {
                 <div class="form-group">
                     <label class="control-label">Réponse/Choix</label>
-                        <input type="text" asp-for="Question.Choix" name="Question.Choix[0].Options" required class="items form-control" />
+                        <input type="text" asp-for="Question.Choix" name="Question.Choix[0]" required class="items form-control" />
                 </div>
             }
             </div>
             <div class="form-group">
-                <input type="submit" value="Ajouter" class="btn btn-default" />
+                <input type="submit" value="@ViewBag.Titre" class="btn btn-primary" />
             </div>
         </form>
         <div>
@@ -176,7 +177,7 @@
                 e.preventDefault();
                 var i = ($(".items").length)
                 var nvChamp = $(' <label class="control-label">Réponse/Choix : '+i+'</label>' + 
-                '<input type="text" name="Choix[' + i + ']" class="items form-control"/>')
+                '<input type="text" name="Question.Choix[' + i + '].Options" class="items form-control"/>')
                 $('#Choix').append(nvChamp);
             });
             @*$("#questionForm").submit(function () {
