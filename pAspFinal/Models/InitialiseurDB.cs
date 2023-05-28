@@ -1,4 +1,7 @@
-﻿using pAspFinal.Models;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using pAspFinal.Models;
 
 namespace pAspFinal.Models
 {
@@ -101,6 +104,10 @@ namespace pAspFinal.Models
 
         };
 
+
+
+
+
         private static Dictionary<string, Question> _TitreQuestion;
         public static Dictionary<string, Question> TitreQuestion
         {
@@ -147,8 +154,24 @@ namespace pAspFinal.Models
             new Formulaire { Nom = "FormulaireAdmin", Questions = _Questions, Utilisateurs = _Utilisateur},
             new Formulaire { Nom = "FormulaireUtilisateur", Questions = _Questions, Utilisateurs = _Utilisateur}
         };
+        
+        public static Utilisateur utili = new Utilisateur
+        {
+            Compagnie = "SeedCompagnie",
+            Email = "email@ceedcompagnie.com",
+            EmailConfirmed = true,
+            UserName = "email@seedcompagnie.com",
 
-        public static void Seed(IApplicationBuilder applicationBuilder)
+        };
+        public static IdentityRole roleAdmin = new IdentityRole
+        {
+            Name = "Admin",
+            NormalizedName = "Admin",
+
+        };
+
+
+        public static async void Seed(IApplicationBuilder applicationBuilder)
         {
             pAspFinal_dbContext pAspFinal_DbContext = applicationBuilder.ApplicationServices.CreateScope().ServiceProvider.GetRequiredService<pAspFinal_dbContext>();
 
@@ -162,11 +185,6 @@ namespace pAspFinal.Models
                 pAspFinal_DbContext.Utilisateurs.AddRange(_Utilisateur);
                 pAspFinal_DbContext.SaveChanges();
             }
-            /*if (!pAspFinal_DbContext.Roles.Any())
-            {
-                pAspFinal_DbContext.Roles.AddRange(NomRoles.Values);
-                pAspFinal_DbContext.SaveChanges();
-            }*/
             if (!pAspFinal_DbContext.Questions.Any())
             {
                 pAspFinal_DbContext.Questions.AddRange(_Questions);
@@ -187,6 +205,23 @@ namespace pAspFinal.Models
                 pAspFinal_DbContext.Choixs.AddRange(_Choix);
                 pAspFinal_DbContext.SaveChanges();
             }
+
+            if (!pAspFinal_DbContext.Roles.Any(r => r.Name == "Admin"))
+            {
+                pAspFinal_DbContext.Roles.Add(roleAdmin);
+                pAspFinal_DbContext.SaveChanges();
+            }
+            if (!pAspFinal_DbContext.Utilisateurs.Any(u => u.UserName == utili.UserName))
+            {
+                var password = new PasswordHasher<Utilisateur>();
+                var hashed = password.HashPassword(utili, "password");
+                utili.PasswordHash = hashed;
+                var userStore = new UserStore<Utilisateur>(pAspFinal_DbContext);
+                await userStore.CreateAsync(utili);
+                await userStore.AddToRoleAsync(utili, "admin");
+            }
+
+
 
 
         }
