@@ -1,0 +1,35 @@
+﻿@model pAspFinal.ViewModels.RolesUtilisateurViewModel;
+@using Microsoft.AspNetCore.Mvc.Rendering
+@using Microsoft.AspNetCore.Mvc.ViewFeatures
+
+
+<h1>Ajouter un role de @Model.Role.Name a un utilisateur</h1>
+<h2>c'eux qui possède le role : </h2>
+<p></p>
+@foreach (Utilisateur U in Model.Membres)
+{
+    <p>
+        @U.UserName,        @U.Compagnie
+    </p>
+    <form asp-action="ModifierRoleUsager">
+        <input type="hidden" name="roleId" value="@Model.Role.Id" />
+        <input type="hidden" name="userId" value="@U.Id" />
+        <input type="hidden" name="modif" value="-1" />
+
+        <button type="submit" class="btn btn-primary">Enlever le role</button>
+    </form>
+}
+<h2>c'eux qui ne possède pas le role : </h2>
+@foreach (Utilisateur U in Model.NonMembres)
+{    
+    <p>
+        @U.UserName,     @U.Compagnie
+    </p>
+    <form asp-action="ModifierRoleUsager">
+        <input type="hidden" name="roleId" value="@Model.Role.Id" />
+        <input type="hidden" name="userId" value="@U.Id" />
+        <input type="hidden" name="modif" value="1" />
+
+        <button type="submit" class="btn btn-primary">Ajouter role</button>
+    </form>    
+}

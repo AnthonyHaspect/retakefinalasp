@@ -10,17 +10,21 @@ namespace pAspFinal.Controllers
     {
         private RoleManager<IdentityRole> _roleManager;
         private UserManager<Utilisateur> _userManager;
+        private readonly pAspFinal_dbContext _dbContext;
 
-        public RolesController(RoleManager<IdentityRole> roleManager, UserManager<Utilisateur> userManager)
+        public RolesController(RoleManager<IdentityRole> roleManager, UserManager<Utilisateur> userManager, pAspFinal_dbContext dbContext)
         {
             _roleManager = roleManager;
             _userManager = userManager;
+            _dbContext = dbContext;
         }
 
         public ViewResult Index()
         {
-            return View(_roleManager.Roles);
+            var roles = _roleManager.Roles;
+            return View(roles);
         }
+
         [HttpGet]
         public IActionResult Creer()
         {
@@ -91,16 +95,16 @@ namespace pAspFinal.Controllers
             IList<Utilisateur> membres = new List<Utilisateur>();
             List<Utilisateur> nonMembres = new List<Utilisateur>();
 
-            List<Utilisateur> listeUsagers = _userManager.Users.ToList();
+            var Utili = _userManager.Users.ToList(); 
 
             membres = await _userManager.GetUsersInRoleAsync(role.Name);
-            nonMembres = _userManager.Users.Where(user => !membres.Contains(user)).ToList();
+            nonMembres = Utili.Where(user => !_userManager.IsInRoleAsync(user, role.Name).Result).ToList();
 
             RolesUtilisateurViewModel membresRoleVM = new RolesUtilisateurViewModel
             {
                 Role = role,
-                //NonMembres = nonMembres,
-                //Membres = membres
+                NonMembres = nonMembres,
+                Membres = membres
             };
 
             return View(membresRoleVM);
@@ -139,7 +143,7 @@ namespace pAspFinal.Controllers
 
             }
 
-            return RedirectToAction(nameof(ModifierRoleUsager), "Roles", new { id = roleId });
+            return RedirectToAction(nameof(Index)/*, "Roles", new { id = roleId }*/);
 
         }
 
