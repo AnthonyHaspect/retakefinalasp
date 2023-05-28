@@ -15,7 +15,7 @@
             }
         }
 
-        public void Ajouter(Type type)
+        public void Ajouter(Models.Type type)
         {
             _DbContext.Types.Add(type);
             _DbContext.SaveChanges();

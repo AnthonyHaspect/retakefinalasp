@@ -1,3 +1,11 @@
 ﻿
 <h1>Admin page</h1>
 
+<a class="nav-link" asp-area="" asp-controller="Roles" asp-action="Creer">Ajouter un role</a>
+
+<a class="nav-link" asp-area="" asp-controller="Type" asp-action="Ajouter">Ajouter un Type de question</a>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

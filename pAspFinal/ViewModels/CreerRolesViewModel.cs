@@ -8,6 +8,6 @@ namespace pAspFinal.ViewModels
         [Required]
         [Display(Name = "Nom du role")]
         [StringLength(15, ErrorMessage = "Le {0} doit être entre {2} et {1} caractères" , MinimumLength =2)]
-        public string RoleName { get; set; }
+        public string NomDeRole { get; set; }
     }
 }

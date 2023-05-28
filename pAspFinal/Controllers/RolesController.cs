@@ -5,6 +5,7 @@ using pAspFinal.ViewModels;
 
 namespace pAspFinal.Controllers
 {
+    //référence : cour sur l'authorization et authentification fait en classe
     public class RolesController : Controller
     {
         private RoleManager<IdentityRole> _roleManager;
@@ -29,19 +30,19 @@ namespace pAspFinal.Controllers
         [HttpPost]
         public async Task<IActionResult> Creer(CreerRolesViewModel model)
         {
-            IdentityRole role = await _roleManager.FindByNameAsync(model.RoleName);
+            IdentityRole role = await _roleManager.FindByNameAsync(model.NomDeRole);
 
             if (role != null)
             {
-                ModelState.AddModelError(model.RoleName, "Ce nom de rôle existe déjà, veuillez choisir un autre.");
-                return View(nameof(Creer), model.RoleName);
+                ModelState.AddModelError(model.NomDeRole, "Ce nom de rôle existe déjà, veuillez choisir un autre.");
+                return View(nameof(Creer), model.NomDeRole);
             }
 
             if (ModelState.IsValid)
             {
                 IdentityRole nvRole = new IdentityRole
                 {
-                    Name = model.RoleName
+                    Name = model.NomDeRole
                 };
 
                 IdentityResult result = await _roleManager.CreateAsync(nvRole);

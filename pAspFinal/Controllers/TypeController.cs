@@ -48,6 +48,7 @@ namespace pAspFinal.Controllers
         /// <param name="type"></param>
         /// <returns></returns>
         [HttpPost]
+        //probablement une erreur a cause du fait que le nom de la classe est Type
         public RedirectToActionResult Ajouter(Models.Type type)
         {
             _LesTypes.Ajouter(type);

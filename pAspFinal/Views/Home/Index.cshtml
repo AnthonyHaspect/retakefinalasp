@@ -7,3 +7,8 @@
     <p>Les options sont en haut pour voir les liste</p>
     <p>le but de ce site est de créer des question les ajouter à un formulaire et ensuite y répondre avec un utilisateur</p>
 </div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
