@@ -101,7 +101,7 @@ namespace pAspFinal.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> Supprimer(int id)
+        public IActionResult Supprimer(int id)
         {
             //var question = await _dbContext.Questions.FindAsync(id);
             //_dbContext.Questions.Remove(question);
